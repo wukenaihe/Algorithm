@@ -26,20 +26,8 @@ public class RotateImage {
 		}
 		int l=matrix.length;
 		int temp1,temp2;
-		temp1=matrix[x][y+length-1];
-		matrix[x][y+length-1]=matrix[x][y];
 		
-		temp2=matrix[x+length-1][y+length-1];
-		matrix[x+length-1][y+length-1]=temp1;
-		
-		temp1=matrix[x+length-1][y];
-		matrix[x+length-1][y]=temp2;
-		
-		matrix[x][y]=temp1;
-		
-		
-		
-		for(int i=y+1;i<y+length-1;++i){
+		for(int i=y;i<y+length-1;++i){
 			
 			temp1=matrix[i][l-x-1];
 			matrix[i][l-x-1]=matrix[x][i];
@@ -57,8 +45,8 @@ public class RotateImage {
 	}
 	
 	public static void main(String[] args) {
-//		int[][] matrix=new int[][]{{1,2,3},{4,5,6},{7,8,9}};
-		int[][] matrix=new int[][]{{1,2},{3,4}};
+		int[][] matrix=new int[][]{{1,2,3},{4,5,6},{7,8,9}};
+//		int[][] matrix=new int[][]{{1,2},{3,4}};
 
 		RotateImage r=new RotateImage();
 		
