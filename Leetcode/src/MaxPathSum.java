@@ -33,7 +33,6 @@ public class MaxPathSum {
 		int max=a>=b?a:b;
 		max=max>0?max:0;
 		
-		
 		return root.val+max;
 	}
 	
