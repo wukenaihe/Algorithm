@@ -13,7 +13,7 @@ public class WordBreak {
 	public ArrayList<String> wordBreak(String s, Set<String> dict) {
 		int l1=s.length();
 		int l2=dict.size();
-		ArrayList<String> rs=new ArrayList<>();
+		ArrayList<String> rs=new ArrayList<String>();
 		strs=new String[dict.size()];
 		int i=0;
 		for (String string : dict) {
@@ -28,7 +28,7 @@ public class WordBreak {
 		if(map.get(start)!=null){
 			return map.get(start);
 		}
-		List<String> list=new ArrayList<>();
+		List<String> list=new ArrayList<String>();
 		String temp;
 		for(int i=0;i<l2;++i){
 			if(result[i][start]){

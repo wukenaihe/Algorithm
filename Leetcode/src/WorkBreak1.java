@@ -7,7 +7,7 @@ import java.util.Set;
 public class WorkBreak1 {
 	String[] dicts;
 	boolean[][] result;
-	Map<Integer, Boolean> record = new HashMap<>();
+	Map<Integer, Boolean> record = new HashMap<Integer, Boolean>();
 
 	public boolean wordBreak(String s, Set<String> dict) {
 		int length = dict.size();

@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Test {
 	public static void main(String[] args) throws InterruptedException {
-		List<String> list=new ArrayList<>();
+		List<String> list=new ArrayList<String>();
 		Collections.checkedList(list, String.class);
 		Collections.synchronizedList(list);
 		list.contains("a");

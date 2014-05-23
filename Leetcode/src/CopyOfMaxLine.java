@@ -27,7 +27,7 @@ public class CopyOfMaxLine {
 		}
 		int max=2;
 		for(int i=0;i<points.length-1;++i){
-			Map<Double, Integer> lines=new HashMap<>();
+			Map<Double, Integer> lines=new HashMap<Double, Integer>();
 			Point p=points[i];
 			int same=0;
 			int maxLine=1;
