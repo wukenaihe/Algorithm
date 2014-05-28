@@ -30,7 +30,7 @@ public class ImmutableQueue<E> {
 			throw new IllegalArgumentException("");
 		}
 		Object[] array = new Object[size + 1];
-		System.arraycopy(elements, 0, array, 0, size);
+		ArrayCopy.copy(elements, array);
 		array[size]=e;
 		return new ImmutableQueue<E>(array);
 	}
