@@ -1,8 +1,6 @@
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-import jp.co.worksap.global.ImmutableQueue3;
-
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -44,14 +42,6 @@ public class ImmutableQueueTest {
 		}
 	}
 	
-	@Test
-	@Ignore
-	public void add4(){
-		ImmutableQueue3<Integer> q=new ImmutableQueue3<Integer>();
-		for(int i=0;i<100000;++i){
-			q=q.enqueue(1);
-		}
-	}
 	
 //	@Test
 //	public void add5(){

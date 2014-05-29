@@ -1,9 +1,7 @@
-package com.xumh.collections;
+package jp.co.worksap.global;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
-
-import jp.co.worksap.global.ArrayCopy;
 
 /**
  * The Queue class represents an immutable first-in-first-out(FIFO) queue of objects
