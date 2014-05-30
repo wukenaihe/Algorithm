@@ -1,10 +1,10 @@
 import java.util.NoSuchElementException;
 import java.util.Random;
 
+import jp.co.worksap.global.ImmutableQueue;
+
 import org.junit.Ignore;
 import org.junit.Test;
-
-import com.xumh.collections.ImmutableQueue;
 
 
 

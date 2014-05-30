@@ -1,9 +1,11 @@
 package com.xumh.collections;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DequeueTest {
@@ -30,6 +32,8 @@ public class DequeueTest {
 		
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("a", "b");
+		
+		List<Integer> list=new ArrayList<Integer>();
 		
 		Collections.unmodifiableMap(map);
 	}
