@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * The Queue class represents an immutable first-in-first-out(FIFO) queue of
  * objects
  * 
- * @author xumh
+ * @author Xu Minhua
  * 
  * @param <E>
  */
