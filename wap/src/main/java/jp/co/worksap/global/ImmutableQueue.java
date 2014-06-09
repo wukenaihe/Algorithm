@@ -1,6 +1,7 @@
 package jp.co.worksap.global;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -13,17 +14,18 @@ import java.util.NoSuchElementException;
  */
 public class ImmutableQueue<E> {
 
-	private final Object[] elements;
-	private final int size;
+	private List<E> elements;
+	private int start;
+	private int end;
 
 	public ImmutableQueue() {
-		elements = new Object[] {};
-		size = 0;
+		elements = new ArrayList<E>();
+		start = 0;
+		end = 0;
 	}
 
-	private ImmutableQueue(final Object[] elements) {
-		this.elements = elements;
-		size = elements.length;
+	private ImmutableQueue(List<E> list) {
+		this.elements = list;
 	}
 
 	/**
@@ -48,10 +50,28 @@ public class ImmutableQueue<E> {
 		if (e == null) {
 			throw new IllegalArgumentException("");
 		}
-		Object[] array = new Object[size + 1];
-		System.arraycopy(elements, 0, array, 0, size);
-		array[size] = e;
-		return new ImmutableQueue<E>(array);
+		ImmutableQueue<E> r;
+
+		// Share data, dequeue is hold just by one
+		synchronized (elements) {
+			if (elements.size() == end) {
+				r = new ImmutableQueue<E>(elements);
+				elements.add(e);
+				r.start = start;
+				r.end = end + 1;
+				return r;
+			}
+		}
+
+		List<E> copy = new ArrayList<E>(end - start + 1);
+		for (int i = start; i < end; ++i) {
+			copy.add(elements.get(i));
+		}
+		copy.add(e);
+		r = new ImmutableQueue<E>(copy);
+		r.start = 0;
+		r.end = end - start + 1;
+		return r;
 	}
 
 	/**
@@ -71,11 +91,13 @@ public class ImmutableQueue<E> {
 	 * @throws java.util.NoSuchElementException
 	 */
 	public ImmutableQueue<E> dequeue() {
-		if (size == 0) {
+		if (end <= start) {
 			throw new NoSuchElementException();
 		}
-		Object[] array = Arrays.copyOfRange(elements, 1, size);
-		return new ImmutableQueue<E>(array);
+		ImmutableQueue<E> r = new ImmutableQueue<E>(elements);
+		r.start = start + 1;
+		r.end = end;
+		return r;
 	}
 
 	/**
@@ -93,12 +115,11 @@ public class ImmutableQueue<E> {
 	 * @return the head of this queue
 	 * @throws java.util.NoSuchElementException
 	 */
-	@SuppressWarnings("unchecked")
 	public E peek() {
-		if (size == 0) {
+		if (end <= start) {
 			throw new NoSuchElementException();
 		}
-		return (E) elements[0];
+		return elements.get(start);
 	}
 
 	/**
@@ -107,7 +128,7 @@ public class ImmutableQueue<E> {
 	 * @return the number of elements in this queue
 	 */
 	public int size() {
-		return size;
+		return end - start;
 	}
 
 	/**
@@ -121,19 +142,17 @@ public class ImmutableQueue<E> {
 	 * @return a string representation of this collection
 	 */
 	public String toString() {
-		if (size == 0)
+		if (end - start <= 0)
 			return "[]";
 
 		StringBuilder sb = new StringBuilder();
 		sb.append('[');
-		for (int i = 0; i < size - 1; i++) {
-			@SuppressWarnings("unchecked")
-			E e = (E) elements[i];
+		for (int i = start; i < end - 1; i++) {
+			E e = elements.get(i);
 			sb.append(e);
 			sb.append(',').append(' ');
 		}
-		@SuppressWarnings("unchecked")
-		E last = (E) elements[size - 1];
+		E last = elements.get(end - 1);
 		sb.append(last);
 		return sb.append(']').toString();
 	}
