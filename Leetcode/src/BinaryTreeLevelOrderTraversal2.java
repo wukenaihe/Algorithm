@@ -30,7 +30,7 @@ public class BinaryTreeLevelOrderTraversal2 {
 
 	Queue<Node> q=new LinkedList<Node>();	
 	public List<List<Integer>> levelOrderBottom(TreeNode root) {
-		LinkedList<List<Integer>> list=new LinkedList<>();
+		LinkedList<List<Integer>> list=new LinkedList<List<Integer>>();
 		
 		if(root==null){
 			return list;
