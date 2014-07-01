@@ -1,4 +1,3 @@
-import java.util.List;
 
 public class RemoveDuplicatesfromSortedList2 {
 	public ListNode deleteDuplicates(ListNode head) {
