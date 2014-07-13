@@ -19,6 +19,7 @@ public class LetterCombinationsPhoneNumber {
 	public List<String> letterCombinations(String digits) {
 		List<String> result=new ArrayList<String>();
 		if(digits.length()==0){
+			result.add("");
 			return result;
 		}else if(digits.length()==1){
 			result.addAll(Arrays.asList(chars[Integer.valueOf(digits)]));
