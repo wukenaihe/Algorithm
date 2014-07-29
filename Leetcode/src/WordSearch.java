@@ -1,66 +1,57 @@
-
 public class WordSearch {
-	char[] chars;
-	char[][] board;
-	int l1,l2;
 	public boolean exist(char[][] board, String word) {
-		this.board=board;
-		chars=word.toCharArray();
-		l1=board.length;
-		l2=board[0].length;
-		
-		if(chars.length>l1*l2){
-			return false;
-		}
-		
-		for(int i=0;i<l1;++i){
-			for(int j=0;j<l2;++j){
-				if(exits(i, j, 0)){
+		for (int i = 0; i < board.length; ++i) {
+			for (int j = 0; j < board[0].length; ++j) {
+				if (exist(board, word, 0, i, j)) {
 					return true;
 				}
 			}
 		}
-		
-		return false;
-	}
-	
-	private boolean exits(int x,int y,int num){
-		if(board[x][y]!=chars[num]){
-			return false;
-		}else if(num==chars.length-1){
-			return true;
-		}else{
-			char c=board[x][y];
-			board[x][y]='#';
-			if(x-1>0&&exits(x-1, y, num+1)){
-				return true;
-			}
-			
-			if(x+1<l1&&exits(x+1,y,num+1)){
-				return true;
-			}
-			
-			if(y-1>0&&exits(x, y-1, num+1)){
-				return true;
-			}
-			
-			if(y+1<l2&&exits(x,y+1, num+1)){
-				return true;
-			}
-			board[x][y]=c;
-		}
-		
+
 		return false;
 	}
 
-	
+	public boolean exist(char[][] board, String word, int index, int x, int y) {
+		if (index == word.length() - 1 && word.charAt(index) == board[x][y]) {
+			return true;
+		}
+
+		if (word.charAt(index) != board[x][y]) {
+			return false;
+		}
+
+		char temp = board[x][y];
+		board[x][y] = '.';
+		boolean b1 = false, b2 = false, b3 = false, b4 = false;
+		if (x - 1 >= 0 && board[x - 1][y] != '.') {
+			b1 = exist(board, word, index + 1, x - 1, y);
+		}
+		if (!b1 && y - 1 >= 0 && board[x][y - 1] != '.') {
+			b2 = exist(board, word, index + 1, x, y - 1);
+		}
+		if (!b1 && !b2 && x + 1 < board.length && board[x + 1][y] != '.') {
+			b3 = exist(board, word, index + 1, x + 1, y);
+		}
+		if (!b1 && !b2 && !b3 && y + 1 < board[0].length
+				&& board[x][y + 1] != '.') {
+			b4 = exist(board, word, index + 1, x, y + 1);
+		}
+
+		board[x][y] = temp;
+		return b1 || b2 || b3 || b4;
+
+	}
+
 	public static void main(String[] args) {
-		WordSearch w=new WordSearch();
-		
-		char[][] board=new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};
-		
+		WordSearch w = new WordSearch();
+
+		char[][] board = new char[][] { { 'A', 'B', 'C', 'E' },
+				{ 'S', 'F', 'C', 'S' }, { 'A', 'D', 'E', 'E' } };
+
 		System.out.println(w.exist(board, "ABCCED"));
-		System.out.println(w.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}}, "SEE"));
-		System.out.println(w.exist(new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}},"ABCB"));
+		System.out.println(w.exist(new char[][] { { 'A', 'B', 'C', 'E' },
+				{ 'S', 'F', 'C', 'S' }, { 'A', 'D', 'E', 'E' } }, "SEE"));
+		System.out.println(w.exist(new char[][] { { 'A', 'B', 'C', 'E' },
+				{ 'S', 'F', 'C', 'S' }, { 'A', 'D', 'E', 'E' } }, "ABCB"));
 	}
 }
