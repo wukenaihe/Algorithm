@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Sum4 {
 	public List<List<Integer>> fourSum(int[] num, int target) {
-		List<List<Integer>> list = new ArrayList<>();
+		List<List<Integer>> list = new ArrayList<List<Integer>>();
 		Arrays.sort(num);
 		for (int i = 0; i < num.length - 3; ++i) {
 			if(i!=0&&num[i]==num[i-1]){
