@@ -1,4 +1,3 @@
-import java.util.Arrays;
 
 public class Queue2 {
 	public int totalNQueens(int n) {
