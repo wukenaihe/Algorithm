@@ -15,19 +15,32 @@ public class SearchforRange {
 				j=mid-1;
 			}
 		}
-		if(i>j){
+		if(A[mid]!=target){
 			return result;
 		}
-		int start=mid;
-		while(start>=i&&A[start]==target){
-			result[0]=start;
-			start--;
+		int m=mid;
+		j=mid-1;
+		while(i<=j){
+			mid=i+(j-i)/2;
+			if(A[mid]!=target){
+				i=mid+1;
+			}else{
+				j=mid-1;
+			}
 		}
-		int end=mid;
-		while(end<=j&&A[end]==target){
-			result[1]=end;
-			end++;
+		result[0]=i;
+		i=m+1;
+		j=A.length-1;
+		while(i<=j){
+			mid=i+(j-i)/2;
+			if(A[mid]!=target){
+				j=mid-1;
+			}else{
+				i=mid+1;
+			}
 		}
+		result[1]=j;
+		
 		return result;
 	}
 	
