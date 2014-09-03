@@ -1,31 +1,30 @@
 public class LongestCommonPrefix {
 	public String longestCommonPrefix(String[] strs) {
-		int length=strs.length;
-		if(length==0){
-			return "";
-		}
-		String max=strs[0];
-		for (String string : strs) {
-			max=longString(max, string);
-		}
-		return max;
-	}
-	
-	private String longString(String s1,String s2){
-		int l=Math.min(s1.length(), s2.length());
-		StringBuilder sb=new StringBuilder();
-		for(int i=0;i<l;++i){
-			if(s1.charAt(i)==s2.charAt(i)){
-				sb.append(s1.charAt(i));
-			}else{
-				break;
-			}
-		}
-		return sb.toString();
-	}
+        if(strs==null||strs.length==0){
+            return "";
+        }
+        
+        StringBuilder sb=new StringBuilder();
+        int start=0;
+        while(true){
+            char c;
+            if(strs[0]!=null&&start<strs[0].length()){
+                c=strs[0].charAt(start);
+            }else{
+                return sb.toString();
+            }
+            for(int i=1;i<strs.length;++i){
+                if(!(strs[i]!=null&&start<strs[i].length()&&strs[i].charAt(start)==c)){
+                    return sb.toString();
+                }
+            }
+            sb.append(c);
+            start++;
+        }
+    }
 	
 	public static void main(String[] args) {
 		LongestCommonPrefix l=new LongestCommonPrefix();
-		System.out.println(l.longestCommonPrefix(new String[]{"aca","cba"}));
+		System.out.println(l.longestCommonPrefix(new String[]{"caca","cba"}));
 	}
 }
