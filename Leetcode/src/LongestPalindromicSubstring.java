@@ -1,50 +1,34 @@
 public class LongestPalindromicSubstring {
 	public String longestPalindrome(String s) {
-		String maxStr = null;
-		int max=0;
-		for(int i=0;i<s.length();++i){
-			int start=i;
-			int end=i;
-			int num=0;
-			while(start>=0&&end<s.length()){
-				if(s.charAt(start)!=s.charAt(end)){
-					num=end-start-1;
-					if(num>max){
-						max=num;
-						maxStr=s.substring(start+1,end);
-					}
-					break;
-				}
-				start--;
-				end++;
-			}
-			num=end-start-1;
-			if(num>max){
-				max=num;
-				maxStr=s.substring(start+1,end);
-			}
-			start=i;
-			end=i+1;
-			while(start>=0&&end<s.length()){
-				if(s.charAt(start)!=s.charAt(end)){
-					num=end-start-1;
-					if(num>max){
-						max=num;
-						maxStr=s.substring(start+1,end);
-					}
-					break;
-				}
-				start--;
-				end++;
-			}
-			num=end-start-1;
-			if(num>max){
-				max=num;
-				maxStr=s.substring(start+1,end);
-			}
-		}
-		return maxStr;
-	}
+        if(s==null){
+            return null;
+        }
+        int length=s.length()*2;
+        String maxStr="";
+        for(int i=0;i<length;++i){
+            int left=i/2;
+            int right=i/2;
+            if(i%2==1){
+                right++;
+            }
+            
+            String res=maxPalindrome(s,left,right);
+            
+            if(res.length()>maxStr.length()){
+                maxStr=res;
+            }
+        }
+        return maxStr;
+        
+    }
+    
+    private String maxPalindrome(String s,int left,int right){
+        while(left>=0&&right<s.length()&&s.charAt(left)==s.charAt(right)){
+            left--;
+            right++;
+        }
+        return s.substring(left+1,right);
+    }
 	
 	public static void main(String[] args) {
 		LongestPalindromicSubstring l=new LongestPalindromicSubstring();
