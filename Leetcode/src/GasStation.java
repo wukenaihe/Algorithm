@@ -1,37 +1,23 @@
 public class GasStation {
 	public int canCompleteCircuit(int[] gas, int[] cost) {
-		int tank=0;
-		int N=gas.length;
-		int i=0;
-		while(i<N){
-			int j=i+1;
-			int p=j%N;
-			tank+=gas[i];
-			tank-=cost[i];
-			while(p!=i){
-				if(tank<0){
-					break;
-				}
-				tank+=gas[p];
-				tank-=cost[p];
-				j++;
-				p=j%N;
-			}
-			if(p==i&&tank>=0){
-				return i;
-			}
-			if(p<=i){
-				return -1;
-			}else{
-				i=p;
-			}
-			
-			tank=0;
-			
-		}
-		
-		return -1;
-	}
+        if(gas==null||gas.length==0||cost==null||cost.length==0){
+            return -1;
+        }
+        int sum=0;
+        int total=0;
+        int pointer=-1;
+        
+        for(int i=0;i<gas.length;++i){
+            int diff=gas[i]-cost[i];
+            sum+=diff;
+            total+=diff;
+            if(sum<0){
+                sum=0;
+                pointer=i;
+            }
+        }
+        return total>=0?pointer+1:-1;
+    }
 	
 	public static void main(String[] args) {
 		GasStation gs=new GasStation();
