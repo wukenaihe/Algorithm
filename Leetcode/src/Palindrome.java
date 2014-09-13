@@ -1,40 +1,41 @@
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Palindrome {
 	public boolean isPalindrome(String s) {
-		int start=0;
-		List<Character> list=handle(s);
-		int end=list.size()-1;
-		while(start<end){
-			if(list.get(start)!=list.get(end)){
-				return false;
-			}
-			start++;
-			end--;
-		}
-		return true;
-	}
-	
-	public List<Character> handle(String s){
-		List<Character> list=new ArrayList<Character>();
-		int l=s.length();
-		
-		for(int i=0;i<l;++i){
-			Character c=s.charAt(i);
-			if(c<='z'&&c>='a'){
-				list.add(c);
-			}else if(c<='Z'&&c>='A'){
-				c=Character.toLowerCase(c);
-				list.add(c);
-			}else if(c<='9'&&c>='0'){
-				list.add(c);
-			}
-		}
-		
-		return list;
-	}
+        if(s==null||s.length()==0){
+            return true;
+        }
+        int start=0;
+        int end=s.length()-1;
+        int dif='a'-'A';
+        while(start<end){
+            while(start<end&&!isAlp(s.charAt(start))){
+                start++;
+            }
+            while(start<end&&!isAlp(s.charAt(end))){
+                end--;
+            }
+            if(start>=end){
+                return true; 
+            }
+            int diff=s.charAt(start)-s.charAt(end);
+            //判断不是回文的唯一条件就是他们不相等。
+            if(diff!=0&&diff!=dif&&diff!=-dif){
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+    
+    private boolean isAlp(char c){
+        if((c<='z'&&c>='a')||(c>='A'&&c<='Z')||(c<='9'&&c>='0')){
+            return true;
+        }else{
+            return false;
+        }
+    }
 	
 	public static void main(String[] args) {
 		Palindrome p=new Palindrome();
@@ -42,5 +43,6 @@ public class Palindrome {
 //		System.out.println(p.isPalindrome("A man, a plan, a canal: Panama"));
 //		System.out.println(p.isPalindrome("race a car"));
 		System.out.println(p.isPalindrome("1a2"));
+		System.out.println(p.isPalindrome("a."));
 	}
 }
