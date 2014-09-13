@@ -1,27 +1,38 @@
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LongestConsecutive {
 	public int longestConsecutive(int[] num) {
-		Arrays.sort(num);
-		int length=num.length,max=1,sum=1;
-		for(int i=0;i<length-1;++i){
-			if(num[i]==num[i+1]-1){
-				sum++;
-			}else if(num[i]==num[i+1]){
-				continue;
-			}else{
-				if(sum>max){
-					max=sum;
-				}
-				sum=1;
-			}
-		}
-		if(sum>max){
-			max=sum;
-		}
-		
-		return max;
-	}
+        if(num==null){
+            return 0;
+        }
+        int max=0;
+        Set<Integer> set=new HashSet<Integer>();
+        for(int i=0;i<num.length;++i){
+            set.add(num[i]);
+        }
+        
+        while(!set.isEmpty()){
+        	int n=set.iterator().next();
+        	int seq=1;
+        	int i=1;
+        	set.remove(n);
+        	while(set.contains(n+i)){
+        		seq++;
+        		set.remove(n+i);
+        		i++;
+        	}
+        	i=-1;
+        	while(set.contains(n+i)){
+        		seq++;
+        		set.remove(n+i);
+        		i--;
+        	}
+        	max=Math.max(max, seq);
+        	
+        }
+        return max;
+    }
 	
 	public static void main(String[] args) {
 		LongestConsecutive l=new LongestConsecutive();
