@@ -1,36 +1,23 @@
-import java.util.Arrays;
 
 public class Distinct {
-	public int numDistinct(String S, String T) {
-		if(S.length()<T.length()){
-			return 0;
-		}
-		int[] f1=new int[S.length()];
-		int[] f2=new int[S.length()];
-		Arrays.fill(f1, 1);
-		for(int i=0;i<T.length();++i){
-			for(int j=i;j<S.length();++j){
-				if(T.charAt(i)==S.charAt(j)){
-					if(j-1<0){
-						f2[j]=1;
-					}else{
-						f2[j]=f1[j-1]+f2[j-1];
-					}
-				}else{
-					if(j-1<0){
-						f2[j]=0;
-					}else{
-						f2[j]=f2[j-1];
-					}
-				}
-			}
-			f1=Arrays.copyOf(f2, f1.length);
-			Arrays.fill(f2, 0);
-		}
-		
-		return f1[S.length()-1];
-	}
-	
+	public int numDistinct(String S, String T) {  
+	    if(T.length()==0)  
+	    {  
+	        return 1;  
+	    }  
+	    if(S.length()==0)  
+	        return 0;  
+	    int[] res = new int[T.length()+1];  
+	    res[0] = 1;  
+	    for(int i=0;i<S.length();i++)  
+	    {  
+	        for(int j=T.length()-1;j>=0;j--)  
+	        {  
+	            res[j+1] = (S.charAt(i)==T.charAt(j)?res[j]:0)+res[j+1];  
+	        }  
+	    }  
+	    return res[T.length()];  
+	}  
 	public static void main(String[] args) {
 		Distinct d=new Distinct();
 		System.out.println(d.numDistinct("ABCDE", "ACE"));
