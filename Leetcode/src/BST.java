@@ -13,34 +13,17 @@ public class BST {
 		}
 	}
 
-	List<Integer> list=new ArrayList<Integer>();
-	
-	public boolean isValidBST(TreeNode root) {
-		if(root==null){
-			return true;
-		}
-		search(root);
-		
-		int first=list.get(0);
-		for(int i=1;i<list.size();++i){
-			int second=list.get(i);
-			if(second<=first){
-				return false;
-			}
-			first=second;
-		}
-		return true;
-	}
-	
-	private void search(TreeNode t){
-		if(t.left!=null){
-			search(t.left);
-		}
-		list.add(t.val);
-		if(t.right!=null){
-			search(t.right);
-		}
-	}
+	TreeNode pre=null;
+    public boolean isValidBST(TreeNode root) {
+        if(root==null){
+            return true;
+        }
+        boolean l=isValidBST(root.left);
+        if(pre!=null&&pre.val>=root.val)
+        	return false;
+        pre=root;
+        return l&&isValidBST(root.right);
+    }
 	
 	public static void main(String[] args) {
 		BST bst=new BST();
@@ -49,7 +32,7 @@ public class BST {
 		TreeNode t2=new TreeNode(1);
 //		TreeNode t3=new TreeNode(3);
 		
-		t1.left=t2;
+		t1.right=t2;
 //		t1.right=t3;
 		
 		System.out.println(bst.isValidBST(t1));
