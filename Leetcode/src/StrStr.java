@@ -25,7 +25,7 @@ public class StrStr {
 	
 	public static void main(String[] args) {
 		String a="abcde";
-		String b="cdf";
+		String b="abc";
 		StrStr s=new StrStr();
 		System.out.println(s.strStr(a, b));
 		
