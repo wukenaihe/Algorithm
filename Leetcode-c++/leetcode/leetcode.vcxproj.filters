@@ -38,5 +38,8 @@
     <ClCompile Include="leetcode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Find_Minimum_in_Rotated_SortedArray.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

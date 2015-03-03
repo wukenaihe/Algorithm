@@ -85,6 +85,7 @@
     <ClInclude Include="trailingZeros.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Find_Minimum_in_Rotated_SortedArray.cpp" />
     <ClCompile Include="leetcode.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
